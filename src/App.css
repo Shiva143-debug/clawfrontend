@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -35,4 +36,244 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 90vh;
+  width: 90vw;
+  border-radius: 16px;
+  margin: 50px;
+  box-shadow: 4px 4px 6px 12px rgb(238, 232, 232);
+}
+
+.image-section {
+  background-color:#202c3c;
+  background-size: cover;
+  width:50%;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 50px;
+
+}
+
+
+@media (max-width: 768px) {
+.container {
+  display: flex;
+  height: 100vh; 
+  width: 100vw; 
+  border-radius: 16px;
+  margin: 0; 
+  flex-direction: column; 
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+}
+
+.form-section {
+  flex: 1; 
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* padding: 20px; */
+}
+
+.i-heading{
+  color:white;
+  font-size: 52px;
+  max-width: 380px;
+
+}
+
+.i-para{
+  color:rgb(167, 181, 249);
+  max-width: 450px;
+}
+
+/* .form-section {
+  flex: 1;
+  display: flex;
+  padding: 50px;
+  background-color: #f7f7f7;
+  width: 30vw;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+} */
+/* 
+.form-container {
+  max-width: 400px;
+  width: 100%;
+} */
+
+h1 {
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #074f9c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 16px;
+  width:220px;
+  height: 50px;
+  
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+
+span {
+  color: blue;
+  cursor: pointer;
+}
+
+
+
+@media (max-width: 768px) {
+  .image-section {
+    display: none; /* Hide the image section on mobile devices */
+  }
+
+  .form-section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.form{
+  padding: 10px;
+}
+.form-container {
+  width: 70%;
+  height: 50%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select{
+  margin-bottom: 20px;
+}
+li{
+  list-style-type: none;
+  margin: 10px;
+}
+.list-of-items{
+  display: flex;
+  flex-wrap: wrap;
+}
+.product{
+  width:350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+
+}
+.cart-card{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* margin-left: 10%;
+  margin-right: 10%; */
+  width:50vw
+}
+
+.order-card{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   margin-left: 10%;
+  margin-right: 10%;
+}
+
+.price-card{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-height: 400px;
+  margin-top: 50px;
+  
+}
+
+.content{
+  padding-top: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+/* Add this CSS to your stylesheet */
+
+.payment-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  margin: 0; /* Remove default margin */
+}
+
+.payment-card form {
+  border: 1px solid gray;
+  width: 500px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better visibility */
+  border-radius: 8px; /* Optional: Round corners */
+}
+
+.payment-card h2 {
+  margin-bottom: 20px; /* Space between heading and form */
+}
+
+.payment-card input,
+.payment-card select,
+.payment-card button {
+  display: block;
+  width: 100%; /* Full width of the form */
+  margin-bottom: 15px; /* Space between form elements */
+  padding: 10px;
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.payment-card button {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.payment-card button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
 }
