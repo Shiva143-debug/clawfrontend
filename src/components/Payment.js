@@ -232,7 +232,7 @@ const Payment = () => {
         const headers = { "Content-Type": "application/json" };
 
         try {
-            const response = await fetch('http://localhost:5000/create-payment', { // Replace with your backend URL
+            const response = await fetch('https://knowledgeable-tidy-eclipse.glitch.me/create-payment', { // Replace with your backend URL
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify(values)

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://knowledgeable-tidy-eclipse.glitch.me';
 
 const register = async (email, password, role) => {
     return axios.post(`${API_URL}/register`, { email, password, role });
