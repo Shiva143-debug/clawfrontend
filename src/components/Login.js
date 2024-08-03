@@ -1,54 +1,4 @@
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { useAuth } from '../AuthContext';
-// import { login } from '../api';
 
-// const Login = () => {
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [error, setError] = useState('');
-    // const navigate = useNavigate();
-    // const { login: authenticate } = useAuth();
-
-    // const handleLogin = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await login(email, password);
-    //         localStorage.setItem('token', response.data.token);
-    //         authenticate();
-    //         navigate('/products');
-    //     } catch (err) {
-    //         // setError(err.response.data.error);
-    //         setError(err.response?.data?.error || 'An error occurred');
-    //     }
-    // };
-
-//     return (
-//         <div>
-//             <h2>Login</h2>
-// <form onSubmit={handleLogin}>
-//     <input
-//         type="email"
-//         value={email}
-//         onChange={(e) => setEmail(e.target.value)}
-//         placeholder="Email"
-//         required
-//     />
-//     <input
-//         type="password"
-//         value={password}
-//         onChange={(e) => setPassword(e.target.value)}
-//         placeholder="Password"
-//         required
-//     />
-//     <button type="submit">Login</button>
-// </form>
-//             {error && <p>{error}</p>}
-//         </div>
-//     );
-// };
-
-// export default Login;
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
@@ -65,23 +15,27 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const { login: authenticate } = useAuth();
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true when starting login
         try {
-            const response = await login(email, password);
-            const role = response.data.role
-            console.log(role)
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('role', response.data.role);
-            authenticate();
-            navigate('/products',{ state: { role }} );
+          const response = await login(email, password);
+          const role = response.data.role;
+          console.log(role);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('role', response.data.role);
+          authenticate();
+          navigate('/products', { state: { role } });
         } catch (err) {
-            // setError(err.response.data.error);
-            setError(err.response?.data?.error || 'An error occurred');
+          setError(err.response?.data?.error || 'An error occurred');
+        } finally {
+          setLoading(false); // Set loading to false after login attempt
         }
-    };
+      };
 
     const signupclick = () => {
         navigate("/")
@@ -97,25 +51,29 @@ const Login = () => {
                     <h1 className='sl-heading'>Log In</h1>
                     <p>Don't have an account? <span onClick={signupclick}>Sign Up</span></p>
                     <form onSubmit={handleLogin} className='form' >
-                        <input  style={{marginBottom:"10px"}} className='form-control'
+                        <input style={{ marginBottom: "10px" }} className='form-control'
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Email"
                             required
                         />
-                        <input style={{marginBottom:"10px"}} className='form-control'
+                        <input style={{ marginBottom: "10px" }} className='form-control'
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                             required
                         />
-                        <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"30px"}}>
-                        <button type="submit" className='rl-button'>Login</button>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "30px" }}>
+                        {loading && <div className="spinner"></div>}
+                           
+                           {!loading && 
+                            <button type="submit" className='rl-button'>Login</button>
+                           }
                         </div>
                     </form>
-                    {error && <p style={{color:"red",textAlign:"center"}}>*{error}</p>}
+                    {error && <p style={{ color: "red", textAlign: "center" }}>*{error}</p>}
                 </div>
 
             </div>

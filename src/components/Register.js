@@ -1,54 +1,3 @@
-// import React, { useState } from 'react';
-// import { register } from '../api';
-
-// const Register = ({ history }) => {
-// const [email, setEmail] = useState('');
-// const [password, setPassword] = useState('');
-// const [role, setRole] = useState('user');
-// const [error, setError] = useState('');
-
-// const handleRegister = async (e) => {
-//     e.preventDefault();
-//     try {
-//         await register(email, password, role);
-//         history.push('/login');
-//     } catch (err) {
-//         setError(err.response.data.error);
-//     }
-// };
-
-//     return (
-//         <div>
-//             <h2>Register</h2>
-//             <form onSubmit={handleRegister}>
-//                 <input
-//                     type="email"
-//                     value={email}
-//                     onChange={(e) => setEmail(e.target.value)}
-//                     placeholder="Email"
-//                     required
-//                 />
-//                 <input
-//                     type="password"
-//                     value={password}
-//                     onChange={(e) => setPassword(e.target.value)}
-//                     placeholder="Password"
-//                     required
-//                 />
-//                 <select value={role} onChange={(e) => setRole(e.target.value)}>
-//                     <option value="user">User</option>
-//                     <option value="admin">Admin</option>
-//                 </select>
-//                 <button type="submit">Register</button>
-//             </form>
-//             {error && <p>{error}</p>}
-//         </div>
-//     );
-// };
-
-// export default Register;
-
-
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -63,15 +12,19 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('user');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setLoading(true)
         try {
             await register(email, password, role);
             navigate('/login');
         } catch (err) {
             setError(err.response.data.error);
+        } finally{
+            setLoading(false)
         }
     };
 
@@ -112,7 +65,12 @@ const Register = () => {
                                 <option value="admin">Admin</option>
                             </select>
                             <div style={{ display: "flex", justifyContent: "center", alignItems: "center",marginTop:"30px" }}>
-                                <button type="submit" className='rl-button'>Register</button>
+                                {/* <button type="submit" className='rl-button'>Register</button> */}
+                                {loading && <div className="spinner"></div>}
+                           
+                           {!loading && 
+                            <button type="submit" className='rl-button'>Login</button>
+                           }
                             </div>
                         </form>
                         {error && <p style={{color:"red",textAlign:"center"}}>{error}</p>}
