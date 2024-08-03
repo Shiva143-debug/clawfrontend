@@ -69,7 +69,7 @@ const Register = () => {
                                 {loading && <div className="spinner"></div>}
                            
                            {!loading && 
-                            <button type="submit" className='rl-button'>Login</button>
+                            <button type="submit" className='rl-button'>Register</button>
                            }
                             </div>
                         </form>
