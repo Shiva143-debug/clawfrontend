@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { addProduct } from '../api';
+import { addProduct ,updateProduct} from '../api';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
-const AddProductDialog = ({ close }) => {
+const AddProductDialog = ({ close, product, mode }) => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
@@ -16,6 +16,7 @@ const AddProductDialog = ({ close }) => {
             setImage(e.target.files[0]);
         }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,13 +31,49 @@ const AddProductDialog = ({ close }) => {
         const token = localStorage.getItem('token');
 
         try {
-            await addProduct(token,formData);
-            alert('Product added successfully');
+            if (mode === 'add') {
+                await addProduct(token, formData);
+                alert('Product added successfully');
+            } else if (mode === 'update') {
+                await updateProduct(product._id, formData, token);
+                alert('Product updated successfully');
+            }
             close(); // Close the dialog
         } catch (err) {
-            setError('Failed to add product');
+            setError('Failed to add/update product');
         }
     };
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     const formData = new FormData();
+    //     formData.append('name', name);
+    //     formData.append('price', price);
+    //     formData.append('description', description);
+    //     formData.append('stock', stock);
+    //     formData.append('image', image);
+
+    //     const token = localStorage.getItem('token');
+
+    //     try {
+    //         await addProduct(token,formData);
+    //         alert('Product added successfully');
+    //         close(); // Close the dialog
+    //     } catch (err) {
+    //         setError('Failed to add product');
+    //     }
+    // };
+
+    useEffect(() => {
+        if (mode === 'update' && product) {
+            setName(product.name);
+            setPrice(product.price);
+            setDescription(product.description);
+            setImage(product.image);
+            setStock(product.stock);
+
+        }
+    }, [mode, product]);
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -86,9 +123,10 @@ const AddProductDialog = ({ close }) => {
                 />
             </Form.Group>
             {error && <p className="text-danger">{error}</p>}
-            <Button variant="primary" type="submit" className='mt-3'>
+            {/* <Button variant="primary" type="submit" className='mt-3'>
                 Add Product
-            </Button>
+            </Button> */}
+             <Button type="submit" className='mt-3'>{mode === 'add' ? 'Add Product' : 'Update Product'}</Button>
         </Form>
     );
 };

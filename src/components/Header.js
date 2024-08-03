@@ -9,6 +9,7 @@ const Header = () => {
 
     const { logout } = useAuth();
     const navigate = useNavigate();
+    const totalQuantity = localStorage.getItem('totalQuantity');
 
     const onlogout=()=>{
         logout();
@@ -18,11 +19,11 @@ const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-                <img src="/path/to/logo.png" alt="Company Logo" />
+                <img src="https://res.cloudinary.com/dxgbxchqm/image/upload/v1722687042/Flipkart-Emblem_xj818h.png" alt="Company Logo"  />
             </div>
             <nav className="nav-links">
             <Link to="/products" className="link-item">Products</Link>
-            <Link to="/cart" className="link-item">Cart</Link>
+            <Link to="/cart" className="link-item">Cart  <span style={{backgroundColor:"yellow",padding:"5px",borderRadius:"50%"}}>{totalQuantity}</span></Link>
             <Link to="/orders" className="link-item">Orders</Link>
             
             </nav>

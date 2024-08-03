@@ -10,12 +10,14 @@ import Payment from './components/Payment';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from './AuthContext';
 import AddProductDialog from './components/AddProductDialog';
+import Failure from './components/Failure';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
     return (
         <AuthProvider>
             <Router>
+           
                 <Routes>
                     <Route path="/" element={<Register />} />
                     <Route path="/login" element={<Login />} />
@@ -24,6 +26,7 @@ const App = () => {
                     <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
                     <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
                     <Route path="/payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
+                    <Route path="/failure" element={<Failure/>}></Route>
                     <Route path="/" element={<Products />} />
                 </Routes>
             </Router>

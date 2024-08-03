@@ -98,9 +98,12 @@ body, html {
 
 .i-heading{
   color:white;
-  font-size: 52px;
+  /* font-size: 52px; */
   max-width: 380px;
 
+}
+h5{
+  color:white
 }
 
 .i-para{
@@ -147,6 +150,17 @@ button {
   
 }
 
+.rl-button{
+  padding: 10px;
+  font-size: 16px;
+  background-color: #074f9c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 16px;
+  width:"100%"
+}
+
 button:hover {
   background-color: #0056b3;
 }
@@ -179,7 +193,7 @@ span {
 }
 .form-container {
   width: 70%;
-  height: 50%;
+  height: 70%;
   margin: auto;
   padding: 20px;
   border-radius: 8px;
@@ -208,7 +222,7 @@ li{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* margin-left: 10%;
   margin-right: 10%; */
-  width:50vw
+  width:70vw
 }
 
 .order-card{
@@ -276,4 +290,20 @@ li{
 
 .payment-card button:hover {
   background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Spinner styles */
+.spinner {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: 100px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

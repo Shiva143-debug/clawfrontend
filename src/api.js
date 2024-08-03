@@ -12,7 +12,6 @@ const login = async (email, password) => {
 
 const addProduct = async (token,formData) => {
     return axios.post(`${API_URL}/products`, formData, {
-        // headers: {Authorization: token}
         headers: {
             'Content-Type': 'multipart/form-data', 
             'Authorization': token 
@@ -25,10 +24,6 @@ const getProducts = async () => {
     return axios.get(`${API_URL}/products`);
 };
 
-
-const getUser = async () => {
-    return axios.get(`${API_URL}/user`);
-};
 
 const addProductToCart = async (token, productId, quantity) => {
     return axios.post(`${API_URL}/cart`, { productId, quantity }, {
@@ -54,12 +49,31 @@ const getOrders = async (token) => {
     });
 };
 
-const makePayment = async (token, amount, paymentMethod) => {
-    return axios.post(`${API_URL}/payment`, { amount, paymentMethod }, {
+const makePayment = async (token, totalAmount, paymentMethod) => {
+    return axios.post(`${API_URL}/payment`, { totalAmount, paymentMethod }, {
         headers: { Authorization: token }
     });
 };
 
+const deleteCartItem = async (productId, token) => {
+
+    return axios.delete(`${API_URL}/cart/${productId}`, {
+        headers: { Authorization: token }
+    });
+};
+
+const deleteProduct = async (productId, token) => {
+
+    return axios.delete(`${API_URL}/products/${productId}`, {
+        headers: { Authorization: token }
+    });
+};
+
+const updateProduct = async (productId, productData, token) => {
+    return await axios.put(`${API_URL}/products/${productId}`, productData, {
+        headers: { Authorization: token }
+    });
+};
 export {
     register,
     login,
@@ -70,5 +84,7 @@ export {
     placeOrder,
     getOrders,
     makePayment,
-    getUser
+    deleteCartItem,
+    deleteProduct,
+    updateProduct
 };

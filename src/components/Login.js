@@ -74,6 +74,7 @@ const Login = () => {
             const role = response.data.role
             console.log(role)
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('role', response.data.role);
             authenticate();
             navigate('/products',{ state: { role }} );
         } catch (err) {
@@ -110,11 +111,11 @@ const Login = () => {
                             placeholder="Password"
                             required
                         />
-                        <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                        <button type="submit">Login</button>
+                        <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"30px"}}>
+                        <button type="submit" className='rl-button'>Login</button>
                         </div>
                     </form>
-                    {error && <p>{error}</p>}
+                    {error && <p style={{color:"red",textAlign:"center"}}>*{error}</p>}
                 </div>
 
             </div>

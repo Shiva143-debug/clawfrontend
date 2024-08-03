@@ -111,11 +111,11 @@ const Register = () => {
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                <button type="submit">Register</button>
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center",marginTop:"30px" }}>
+                                <button type="submit" className='rl-button'>Register</button>
                             </div>
                         </form>
-                        {error && <p>{error}</p>}
+                        {error && <p style={{color:"red",textAlign:"center"}}>{error}</p>}
                     </div>
                 </div>
             </div>

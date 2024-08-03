@@ -1,19 +1,42 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getOrders } from '../api';
+import "../App.css"
 import Header from './Header';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
-
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchOrders = async () => {
             const token = localStorage.getItem('token');
-            const response = await getOrders(token);
-            setOrders(response.data);
+            try {
+                const response = await getOrders(token);
+                setOrders(response.data);
+            } catch (error) {
+                console.error('Failed to fetch orders:', error);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchOrders();
     }, []);
+
+    const onShop=()=> navigate("/products")
+
+    if (loading) {
+        return <div className="spinner"></div>;
+    }
+
+    if (orders.length === 0) {
+        return <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
+            <h1>No Recent orders</h1>
+            <img src="https://res.cloudinary.com/dxgbxchqm/image/upload/v1718453417/depositphotos_38143799-stock-photo-e-commerce-shopping-cart-with_pyqoxn.webp" alt="empty-img"/>
+             <button onClick={onShop} style={{cursor:"pointer"}} className='mt-5'>Shop Now</button>
+            </div>;
+    }
 
     return (
         <div>
